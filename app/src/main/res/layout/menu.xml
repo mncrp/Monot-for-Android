@@ -65,4 +65,10 @@
         android:text="@string/settings_menu_text"
         android:background="@drawable/partsdesign"
         android:textColor="@color/black"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/github_repo"
+        android:background="@drawable/partsdesign"
+        android:textColor="@color/black"/>
 </LinearLayout>

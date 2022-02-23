@@ -37,6 +37,7 @@
             android:paddingStart="8dp"
             android:textColor="@color/search_black"
             android:textColorHint="@color/search_black"
+            android:selectAllOnFocus="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="LabelFor,MissingConstraints,RtlHardcoded,RtlSymmetry,SpeakableTextPresentCheck,TextFields" />

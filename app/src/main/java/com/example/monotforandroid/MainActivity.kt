@@ -19,8 +19,15 @@ class MainActivity : AppCompatActivity() {
         val webView = findViewById<WebView>(R.id.webview)
         val searchButton = findViewById<ImageButton>(R.id.searchButton)
 
+        editText.text.clear()
+
         // WebView関連
-        webView.webViewClient = WebViewClient()
+        webView.webViewClient = object : WebViewClient() {
+            override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
+                editText.setText(url)
+                return false
+            }
+        }
         webView.settings.javaScriptEnabled = true
         webView.settings.userAgentString = webView.settings.userAgentString + "Mobile Monot/1.0.0Beta1"
         webView.loadUrl("https://google.co.jp")
