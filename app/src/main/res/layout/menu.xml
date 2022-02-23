@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/partsdesign"
+            android:contentDescription="@string/menu_button_name"
+            android:padding="12dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/reload" />
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/partsdesign"
+            android:contentDescription="@string/menu_button_name"
+            android:padding="12dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/back" />
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/partsdesign"
+            android:contentDescription="@string/menu_button_name"
+            android:padding="12dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/prev" />
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/partsdesign"
+            android:contentDescription="@string/menu_button_name"
+            android:padding="12dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/home" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_menu_text"
+        android:background="@drawable/partsdesign"/>
+</LinearLayout>

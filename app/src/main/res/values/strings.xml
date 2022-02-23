@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Monot</string>
+    <string name="search_button_name">SearchButton</string>
+    <string name="menu_button_name">MenuButton</string>
+    <string name="credit">Powered by monochrome Project.</string>
+    <string name="address_hint">URLを入力</string>
+    <string name="settings_menu_text">設定</string>
+    <string name="reload">再読み込み</string>
+    <string name="prev">進む</string>
+    <string name="back">戻る</string>
+    <string name="home">ホーム</string>
+    <string name="github_repo">リポジトリ</string>
+    <string name="history">履歴</string>
+    <string name="reloadbutton">ReloadButton</string>
+</resources>
