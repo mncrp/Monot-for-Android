@@ -5,8 +5,7 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.EditText
-import android.widget.ImageButton
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -18,7 +17,17 @@ class MainActivity : AppCompatActivity() {
         val editText = findViewById<EditText>(R.id.editTextURL)
         val webView = findViewById<WebView>(R.id.webview)
         val searchButton = findViewById<ImageButton>(R.id.searchButton)
+        val menuButton = findViewById<ImageButton>(R.id.menuButton)
 
+        // メニュー関連
+        val popupMenu = PopupWindow()
+        val menuLayout = findViewById<LinearLayout>(R.id.menuLayout)
+        val menuView = FrameLayout(this).also {
+            it.addView(menuLayout)
+        }
+        popupMenu.contentView = menuView
+
+        //アドレスバーの初期化
         editText.text.clear()
 
         // WebView関連
@@ -32,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         webView.settings.userAgentString = webView.settings.userAgentString + "Mobile Monot/1.0.0Beta1"
         webView.loadUrl("https://google.co.jp")
 
+        // 検索ボタン関連
         searchButton.setOnClickListener {
             val urlText: String = editText.text.toString()
             val isItHttp = urlText.startsWith("http")
@@ -53,6 +63,9 @@ class MainActivity : AppCompatActivity() {
                     editText.setText(searchUrl)
                 }
             }
+        }
+        menuButton.setOnClickListener {
+            popupMenu.showAsDropDown(menuButton)
         }
     }
 

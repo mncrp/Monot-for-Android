@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/menu_back">
+    android:background="@color/menu_back"
+    android:id="@+id/menuLayout">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
