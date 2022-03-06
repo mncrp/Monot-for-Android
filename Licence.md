@@ -1,8 +1,3 @@
-<style>
-  * {background-color: #000000; font-family: "Noto Sans JP", sans-serif; font-weight: 100;}
-  h1, h2 {font-weight: 100;}
-</style>
-
 monochrome. License by monochrome.
 v.2.0.0
 Copyright 2022 © monochrome Project.
