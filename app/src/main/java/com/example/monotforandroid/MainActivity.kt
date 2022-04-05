@@ -29,7 +29,6 @@ class MainActivity : AppCompatActivity() {
         val noMenu = findViewById<View>(R.id.noMenu)
 
         menu.visibility = View.INVISIBLE
-        menu.scaleY = 0F
 
         // メニュー関連
         /*val popupMenu = PopupWindow()
