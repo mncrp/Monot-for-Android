@@ -2,14 +2,21 @@ package com.example.monotforandroid
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
+import android.view.Gravity
 import android.view.KeyEvent
+import android.view.MotionEvent
+import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isGone
+import androidx.core.view.isInvisible
 
 class MainActivity : AppCompatActivity() {
-    @SuppressLint("SetJavaScriptEnabled")
+    @SuppressLint("SetJavaScriptEnabled", "RtlHardcoded", "ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -18,14 +25,19 @@ class MainActivity : AppCompatActivity() {
         val webView = findViewById<WebView>(R.id.webview)
         val searchButton = findViewById<ImageButton>(R.id.searchButton)
         val menuButton = findViewById<ImageButton>(R.id.menuButton)
+        val menu = findViewById<LinearLayout>(R.id.menuLayout)
+        val noMenu = findViewById<View>(R.id.noMenu)
+
+        menu.visibility = View.INVISIBLE
+        menu.scaleY = 0F
 
         // メニュー関連
-        val popupMenu = PopupWindow()
+        /*val popupMenu = PopupWindow()
         val menuLayout = findViewById<LinearLayout>(R.id.menuLayout)
-        val menuView = FrameLayout(this).also {
+        /*val menuView = FrameLayout(this).also {
             it.addView(menuLayout)
-        }
-        popupMenu.contentView = menuView
+        }*/
+        popupMenu.contentView = menuLayout */
 
         //アドレスバーの初期化
         editText.text.clear()
@@ -65,7 +77,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
         menuButton.setOnClickListener {
-            popupMenu.showAsDropDown(menuButton)
+            /*popupMenu.showAsDropDown(findViewById(R.id.menuButton))
+            Log.d("TAG", "Hi")*/
+            menu.visibility = View.VISIBLE
+            noMenu.setOnClickListener {
+                menu.visibility = View.INVISIBLE
+                noMenu.isClickable = false
+            }
         }
     }
 

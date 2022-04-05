@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_gray"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/constraintLayout">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -84,5 +85,98 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         tools:ignore="MissingConstraints" />
+
+    <!-- メニュークリック後に非表示にするClickListenerを仕掛けるための透明View -->
+    <View
+        android:id="@+id/noMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- メニュー(いつもは非表示) -->
+    <LinearLayout
+        android:id="@+id/menuLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginTop="45dp"
+        android:background="@color/background_gray"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints,RtlHardcoded">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/partsdesign"
+                android:contentDescription="@string/menu_button_name"
+                android:padding="12dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/reload" />
+
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/partsdesign"
+                android:contentDescription="@string/menu_button_name"
+                android:padding="12dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/back" />
+
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/partsdesign"
+                android:contentDescription="@string/menu_button_name"
+                android:padding="12dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/prev" />
+
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/partsdesign"
+                android:contentDescription="@string/menu_button_name"
+                android:padding="12dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/home" />
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/partsdesign"
+            android:text="@string/settings_menu_text"
+            android:textColor="@color/black"
+            android:paddingLeft="10dp"
+            android:gravity="left|center_vertical"
+            tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/partsdesign"
+            android:text="@string/github_repo"
+            android:textColor="@color/black"
+            android:paddingLeft="10dp"
+            android:gravity="left|center_vertical"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
