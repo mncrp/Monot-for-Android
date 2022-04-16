@@ -27,8 +27,10 @@ class MainActivity : AppCompatActivity() {
         val menuButton = findViewById<ImageButton>(R.id.menuButton)
         val menu = findViewById<LinearLayout>(R.id.menuLayout)
         val noMenu = findViewById<View>(R.id.noMenu)
+        val kageZurashi = findViewById<View>(R.id.kageZurashi)
 
         menu.visibility = View.INVISIBLE
+        kageZurashi.visibility = View.INVISIBLE
 
         // メニュー関連
         /*val popupMenu = PopupWindow()
@@ -79,8 +81,10 @@ class MainActivity : AppCompatActivity() {
             /*popupMenu.showAsDropDown(findViewById(R.id.menuButton))
             Log.d("TAG", "Hi")*/
             menu.visibility = View.VISIBLE
+            kageZurashi.visibility = View.VISIBLE
             noMenu.setOnClickListener {
                 menu.visibility = View.INVISIBLE
+                kageZurashi.visibility = View.INVISIBLE
                 noMenu.isClickable = false
             }
         }
