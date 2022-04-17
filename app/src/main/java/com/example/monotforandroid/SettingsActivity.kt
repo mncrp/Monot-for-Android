@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.EditTextPreference
+import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
 
 
@@ -24,7 +25,7 @@ class SettingsActivity : AppCompatActivity() {
     class SettingsFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
-            val signaturePreference: EditTextPreference? = findPreference("search_engine")
+            val signaturePreference: ListPreference? = findPreference("search_engine")
         }
     }
 }

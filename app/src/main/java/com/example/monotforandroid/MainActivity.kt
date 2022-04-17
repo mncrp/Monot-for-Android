@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         val forwardButton = findViewById<ImageButton>(R.id.forwardButton)
         val reloadButton = findViewById<ImageButton>(R.id.reloadButton)
         val homeButton = findViewById<ImageButton>(R.id.homeButton)
+        val repoButton = findViewById<Button>(R.id.repoButton)
 
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val search_engine = sharedPreferences.getString("search_engine", "")
@@ -135,6 +136,9 @@ class MainActivity : AppCompatActivity() {
         }
         homeButton.setOnClickListener {
             webView.loadUrl(searchUrl_top)
+        }
+        repoButton.setOnClickListener {
+            webView.loadUrl("https://github.com/1234yosuke/Monot-for-Android")
         }
     }
 
