@@ -8,4 +8,12 @@
         <item>Ecosia</item>
         <item>Frea Search</item>
     </string-array>
+    <array name="search_engine_values">
+        <item>Google</item>
+        <item>Yahoo!</item>
+        <item>Yahoo! Japan</item>
+        <item>DuckDuckGo</item>
+        <item>Ecosia</item>
+        <item>Frea Search</item>
+    </array>
 </resources>

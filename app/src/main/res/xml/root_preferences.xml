@@ -4,6 +4,7 @@
 
         <ListPreference
             app:key="search_engine"
+            app:entryValues="@array/search_engine_values"
             app:defaultValue="Google"
             app:entries="@array/search_engine"
             app:title="@string/search_engine"
