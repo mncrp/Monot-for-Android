@@ -1,0 +1,11 @@
+<resources>
+    <!-- Reply Preference -->
+    <string-array name="search_engine">
+        <item>Google</item>
+        <item>Yahoo!</item>
+        <item>Yahoo! Japan</item>
+        <item>DuckDuckGo</item>
+        <item>Ecosia</item>
+        <item>Frea Search</item>
+    </string-array>
+</resources>

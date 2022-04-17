@@ -126,6 +126,7 @@
             android:orientation="horizontal">
 
             <ImageButton
+                android:id="@+id/reloadButton"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="end"
@@ -138,6 +139,7 @@
                 app:srcCompat="@drawable/reload" />
 
             <ImageButton
+                android:id="@+id/backButton"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="end"
@@ -150,6 +152,7 @@
                 app:srcCompat="@drawable/back" />
 
             <ImageButton
+                android:id="@+id/forwardButton"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="end"
@@ -162,6 +165,7 @@
                 app:srcCompat="@drawable/prev" />
 
             <ImageButton
+                android:id="@+id/homeButton"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="end"
@@ -175,6 +179,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/settingsButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#00000000"

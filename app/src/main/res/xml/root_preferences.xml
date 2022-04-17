@@ -1,0 +1,14 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/general_settings">
+
+        <ListPreference
+            app:key="search_engine"
+            app:defaultValue="Google"
+            app:entries="@array/search_engine"
+            app:title="@string/search_engine"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

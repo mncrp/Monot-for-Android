@@ -12,4 +12,9 @@
     <string name="github_repo">リポジトリ</string>
     <string name="history">履歴</string>
     <string name="reloadbutton">ReloadButton</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="general_settings">一般設定</string>
+    <string name="search_engine">検索エンジン</string>
 </resources>
