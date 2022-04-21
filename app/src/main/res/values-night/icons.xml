@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="search" type="drawable">@drawable/search_write</item>
-    <item name="back" type="drawable">@drawable/back_write</item>
-    <item name="option" type="drawable">@drawable/option_write</item>
-    <item name="reload" type="drawable">@drawable/reload_write</item>
-    <item name="prev" type="drawable">@drawable/prev_write</item>
-    <item name="home" type="drawable">@drawable/home_write</item>
+    <item name="search_icon" type="drawable">@drawable/search_write</item>
+    <item name="back_icon" type="drawable">@drawable/back_write</item>
+    <item name="option_icon" type="drawable">@drawable/option_write</item>
+    <item name="reload_icon" type="drawable">@drawable/reload_write</item>
+    <item name="prev_icon" type="drawable">@drawable/prev_write</item>
+    <item name="home_icon" type="drawable">@drawable/home_write</item>
 </resources>

@@ -58,7 +58,7 @@
             android:scaleType="fitXY"
             app:layout_constraintStart_toEndOf="@+id/editTextURL"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/search" />
+            app:srcCompat="@drawable/search_icon" />
 
         <ImageButton
             android:id="@+id/menuButton"
@@ -71,7 +71,7 @@
             android:contentDescription="@string/menu_button_name"
             android:padding="12dp"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/option" />
+            app:srcCompat="@drawable/option_icon" />
     </LinearLayout>
 
     <WebView
@@ -135,7 +135,7 @@
                 android:contentDescription="@string/menu_button_name"
                 android:padding="12dp"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/reload" />
+                app:srcCompat="@drawable/reload_icon" />
 
             <ImageButton
                 android:id="@+id/backButton"
@@ -148,7 +148,7 @@
                 android:contentDescription="@string/menu_button_name"
                 android:padding="12dp"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/back" />
+                app:srcCompat="@drawable/back_icon" />
 
             <ImageButton
                 android:id="@+id/forwardButton"
@@ -161,7 +161,7 @@
                 android:contentDescription="@string/menu_button_name"
                 android:padding="12dp"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/prev" />
+                app:srcCompat="@drawable/prev_icon" />
 
             <ImageButton
                 android:id="@+id/homeButton"
@@ -174,7 +174,7 @@
                 android:contentDescription="@string/menu_button_name"
                 android:padding="12dp"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/home" />
+                app:srcCompat="@drawable/home_icon" />
         </LinearLayout>
 
         <Button

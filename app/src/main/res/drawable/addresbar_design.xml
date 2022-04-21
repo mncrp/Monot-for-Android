@@ -30,7 +30,7 @@
                 android:color="#a1a1a1" />
 
             <solid
-                android:color="#efefef" />
+                android:color="@color/addresbar_hover" />
         </shape>
     </item>
 </selector>
