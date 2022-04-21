@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="search" type="drawable">@drawable/search</item>
+    <item name="back" type="drawable">@drawable/back</item>
+    <item name="option" type="drawable">@drawable/option</item>
+    <item name="reload" type="drawable">@drawable/reload</item>
+    <item name="prev" type="drawable">@drawable/prev</item>
+    <item name="home" type="drawable">@drawable/home</item>
+</resources>

@@ -11,7 +11,7 @@
                 />
 
             <solid
-                android:color="#f8f8f8" />
+                android:color="@color/addresbar_back" />
         </shape>
     </item>
     <item android:state_focused="true"
