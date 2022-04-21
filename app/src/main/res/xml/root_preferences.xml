@@ -10,6 +10,13 @@
             app:title="@string/search_engine"
             app:useSimpleSummaryProvider="true" />
 
+        <!--
+        <CheckBoxPreference
+            app:key="native_like"
+            app:title="Native Like Mode"
+            app:summary="通常時にヘッダーを非表示にします"/>
+        -->
+
     </PreferenceCategory>
 
 </PreferenceScreen>

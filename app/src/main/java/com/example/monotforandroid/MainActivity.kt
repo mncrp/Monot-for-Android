@@ -36,6 +36,9 @@ class MainActivity : AppCompatActivity() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val search_engine = sharedPreferences.getString("search_engine", "")
         var searchUrl_top = "null"
+
+        val native_like = sharedPreferences.getBoolean("native_like", false)
+
         // 頭がおかしい(?)
         when (search_engine) {
             "Google" -> {
@@ -77,6 +80,7 @@ class MainActivity : AppCompatActivity() {
 
         // WebView関連
         webView.webViewClient = object : WebViewClient() {
+            @Deprecated("Deprecated in Java")
             override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                 editText.setText(url)
                 return false
