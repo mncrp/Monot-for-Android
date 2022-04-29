@@ -1,6 +1,7 @@
 package com.example.monotforandroid
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.media.Image
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.preference.PreferenceManager
 
 
@@ -33,36 +35,9 @@ class MainActivity : AppCompatActivity() {
         val homeButton = findViewById<ImageButton>(R.id.homeButton)
         val repoButton = findViewById<Button>(R.id.repoButton)
 
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val search_engine = sharedPreferences.getString("search_engine", "")
-        var searchUrl_top = "null"
+        var searchUrl_top = searchEngine()
 
-        val native_like = sharedPreferences.getBoolean("native_like", false)
-
-        // 頭がおかしい(?)
-        when (search_engine) {
-            "Google" -> {
-                searchUrl_top = "https://www.google.com/search?q="
-            }
-            "Yahoo!" -> {
-                searchUrl_top = "https://search.yahoo.com/search?p="
-            }
-            "Yahoo! Japan" -> {
-                searchUrl_top = "https://search.yahoo.co.jp/search?p="
-            }
-            "DuckDuckGo" -> {
-                searchUrl_top = "https://duckduckgo.com/?q="
-            }
-            "Ecosia" -> {
-                searchUrl_top = "https://ecosia.org/search?q=a"
-            }
-            "Frea Search" -> {
-                searchUrl_top = "https://freasearch.org/search?q="
-            }
-            else -> {
-                searchUrl_top = "https://www.google.com/search?q="
-            }
-        }
+        // val native_like = sharedPreferences.getBoolean("native_like", false)
 
         menu.visibility = View.INVISIBLE
         kageZurashi.visibility = View.INVISIBLE
@@ -92,26 +67,7 @@ class MainActivity : AppCompatActivity() {
 
         // 検索ボタン関連
         searchButton.setOnClickListener {
-            val urlText: String = editText.text.toString()
-            val isItHttp = urlText.startsWith("http")
-            val isItUrl = urlText.indexOf(".")
-
-            when {
-                isItHttp -> {
-                    webView.loadUrl(urlText)
-                    editText.setText(urlText)
-                }
-                isItUrl != -1 -> {
-                    val searchUrl = "$searchUrl_top$urlText"
-                    webView.loadUrl(searchUrl)
-                    editText.setText(searchUrl)
-                }
-                else -> {
-                    val searchUrl = "$searchUrl_top$urlText"
-                    webView.loadUrl(searchUrl)
-                    editText.setText(searchUrl)
-                }
-            }
+            url()
         }
         menuButton.setOnClickListener {
             /*popupMenu.showAsDropDown(findViewById(R.id.menuButton))
@@ -155,6 +111,64 @@ class MainActivity : AppCompatActivity() {
             editText.setText(webView.url)
             return true
         }
+        if (keyCode == KeyEvent.KEYCODE_ENTER && editText.isFocused) {
+        }
         return super.onKeyDown(keyCode, event)
+    }
+
+    fun searchEngine(): String {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val search_engine = sharedPreferences.getString("search_engine", "")
+        var searchUrl_top = "null"
+        when (search_engine) {
+            "Google" -> {
+                searchUrl_top = "https://www.google.com/search?q="
+            }
+            "Yahoo!" -> {
+                searchUrl_top = "https://search.yahoo.com/search?p="
+            }
+            "Yahoo! Japan" -> {
+                searchUrl_top = "https://search.yahoo.co.jp/search?p="
+            }
+            "DuckDuckGo" -> {
+                searchUrl_top = "https://duckduckgo.com/?q="
+            }
+            "Ecosia" -> {
+                searchUrl_top = "https://ecosia.org/search?q=a"
+            }
+            "Frea Search" -> {
+                searchUrl_top = "https://freasearch.org/search?q="
+            }
+            else -> {
+                searchUrl_top = "https://www.google.com/search?q="
+            }
+        }
+        return(searchUrl_top)
+    }
+
+    fun url() {
+        val searchUrl_top = searchEngine()
+        val webView = findViewById<WebView>(R.id.webview)
+        val editText = findViewById<EditText>(R.id.editTextURL)
+        val urlText: String = editText.text.toString()
+        val isItHttp = urlText.startsWith("http")
+        val isItUrl = urlText.indexOf(".")
+
+        when {
+            isItHttp -> {
+                webView.loadUrl(urlText)
+                editText.setText(urlText)
+            }
+            isItUrl != -1 -> {
+                val searchUrl = "$searchUrl_top$urlText"
+                webView.loadUrl(searchUrl)
+                editText.setText(searchUrl)
+            }
+            else -> {
+                val searchUrl = "$searchUrl_top$urlText"
+                webView.loadUrl(searchUrl)
+                editText.setText(searchUrl)
+            }
+        }
     }
 }
