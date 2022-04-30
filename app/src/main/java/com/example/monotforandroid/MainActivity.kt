@@ -13,6 +13,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.preference.PreferenceManager
+import android.view.inputmethod.InputMethodManager as InputMethodManager1
 
 
 class MainActivity : AppCompatActivity() {
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         val homeButton = findViewById<ImageButton>(R.id.homeButton)
         val repoButton = findViewById<Button>(R.id.repoButton)
 
-        var searchUrl_top = searchEngine()
+        val searchUrl_top = searchEngine()
 
         // val native_like = sharedPreferences.getBoolean("native_like", false)
 
@@ -111,8 +112,6 @@ class MainActivity : AppCompatActivity() {
             editText.setText(webView.url)
             return true
         }
-        if (keyCode == KeyEvent.KEYCODE_ENTER && editText.isFocused) {
-        }
         return super.onKeyDown(keyCode, event)
     }
 
@@ -134,7 +133,10 @@ class MainActivity : AppCompatActivity() {
                 searchUrl_top = "https://duckduckgo.com/?q="
             }
             "Ecosia" -> {
-                searchUrl_top = "https://ecosia.org/search?q=a"
+                searchUrl_top = "https://ecosia.org/search?q="
+            }
+            "Bing" -> {
+                searchUrl_top = "https://www.bing.com/search?q="
             }
             "Frea Search" -> {
                 searchUrl_top = "https://freasearch.org/search?q="
