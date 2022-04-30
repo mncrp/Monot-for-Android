@@ -1,6 +1,5 @@
 # Monot for Android
 
-![image](images/Screenshot.png)
 monochrome.による、「オシャレ、高機能、そして使いやすい」を目指しているデスクトップ向けブラウザ、MonotのAndroid版です。  
 [monochrome. License](https://sorakime.github.io/mncr/license?v=1.1.1)によってライセンスされています。  
 
