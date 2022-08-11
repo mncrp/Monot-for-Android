@@ -1,9 +1,8 @@
 package com.example.monotforandroid
 
 import android.annotation.SuppressLint
-import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
-import android.media.Image
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
@@ -11,9 +10,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.preference.PreferenceManager
-import android.view.inputmethod.InputMethodManager as InputMethodManager1
 
 
 class MainActivity : AppCompatActivity() {
@@ -101,6 +98,18 @@ class MainActivity : AppCompatActivity() {
         repoButton.setOnClickListener {
             webView.loadUrl("https://github.com/mncrp/Monot-for-Android")
         }
+        editText.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
+                // If the event is a key-down event on the "enter" button
+                if (event.action == KeyEvent.ACTION_DOWN &&
+                    keyCode == KeyEvent.KEYCODE_ENTER
+                ) {
+                    url()
+                    return true
+                }
+                return false
+            }
+        })
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
