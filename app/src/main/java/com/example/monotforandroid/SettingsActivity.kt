@@ -1,9 +1,9 @@
 package com.example.monotforandroid
 
-import android.content.SharedPreferences
+import android.app.PendingIntent.getActivity
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
 

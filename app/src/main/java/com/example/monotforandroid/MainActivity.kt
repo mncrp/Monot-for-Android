@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity() {
             webView.loadUrl(searchUrl_top)
         }
         repoButton.setOnClickListener {
-            webView.loadUrl("https://github.com/1234yosuke/Monot-for-Android")
+            webView.loadUrl("https://github.com/mncrp/Monot-for-Android")
         }
     }
 
