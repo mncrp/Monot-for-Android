@@ -1,11 +1,14 @@
 package com.example.monotforandroid
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.renderscript.ScriptGroup
 import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.*
@@ -34,6 +37,8 @@ class MainActivity : AppCompatActivity() {
         val repoButton = findViewById<Button>(R.id.repoButton)
 
         val searchUrl_top = searchEngine()
+
+        val keyboard = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
         // val native_like = sharedPreferences.getBoolean("native_like", false)
 
@@ -98,13 +103,12 @@ class MainActivity : AppCompatActivity() {
         repoButton.setOnClickListener {
             webView.loadUrl("https://github.com/mncrp/Monot-for-Android")
         }
+        // editTextにフォーカスしている状態でEnterを押された際の動作
         editText.setOnKeyListener(object : View.OnKeyListener {
             override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
-                // If the event is a key-down event on the "enter" button
-                if (event.action == KeyEvent.ACTION_DOWN &&
-                    keyCode == KeyEvent.KEYCODE_ENTER
-                ) {
+                if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
                     url()
+                    keyboard.hideSoftInputFromWindow(currentFocus?.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
                     return true
                 }
                 return false
