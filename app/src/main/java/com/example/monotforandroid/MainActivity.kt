@@ -2,18 +2,18 @@ package com.example.monotforandroid
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
-import android.media.Image
 import android.os.Bundle
+import android.renderscript.ScriptGroup
 import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.preference.PreferenceManager
-import android.view.inputmethod.InputMethodManager as InputMethodManager1
 
 
 class MainActivity : AppCompatActivity() {
@@ -37,6 +37,8 @@ class MainActivity : AppCompatActivity() {
         val repoButton = findViewById<Button>(R.id.repoButton)
 
         val searchUrl_top = searchEngine()
+
+        val keyboard = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
         // val native_like = sharedPreferences.getBoolean("native_like", false)
 
@@ -99,8 +101,19 @@ class MainActivity : AppCompatActivity() {
             webView.loadUrl(searchUrl_top)
         }
         repoButton.setOnClickListener {
-            webView.loadUrl("https://github.com/1234yosuke/Monot-for-Android")
+            webView.loadUrl("https://github.com/mncrp/Monot-for-Android")
         }
+        // editTextにフォーカスしている状態でEnterを押された際の動作
+        editText.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
+                if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                    url()
+                    keyboard.hideSoftInputFromWindow(currentFocus?.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+                    return true
+                }
+                return false
+            }
+        })
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
