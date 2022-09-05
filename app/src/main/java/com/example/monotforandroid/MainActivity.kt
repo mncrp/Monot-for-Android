@@ -68,7 +68,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
         webView.settings.javaScriptEnabled = true
-        webView.settings.userAgentString = webView.settings.userAgentString + "Mobile Monot/1.0.0Beta1"
         webView.loadUrl(searchUrl_top)
 
         // 検索ボタン関連
