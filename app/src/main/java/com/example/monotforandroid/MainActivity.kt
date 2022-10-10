@@ -40,22 +40,12 @@ class MainActivity : AppCompatActivity() {
         val homeButton = findViewById<ImageButton>(R.id.homeButton)
         val repoButton = findViewById<Button>(R.id.repoButton)
 
-        val searchUrl_top = searchEngine()
+        val searchUrlTop = searchEngine()
 
         val keyboard = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
-        // val native_like = sharedPreferences.getBoolean("native_like", false)
-
         menu.visibility = View.INVISIBLE
         kageZurashi.visibility = View.INVISIBLE
-
-        // メニュー関連
-        /*val popupMenu = PopupWindow()
-        val menuLayout = findViewById<LinearLayout>(R.id.menuLayout)
-        /*val menuView = FrameLayout(this).also {
-            it.addView(menuLayout)
-        }*/
-        popupMenu.contentView = menuLayout */
 
         //アドレスバーの初期化
         editText.text.clear()
@@ -70,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         }
         webView.settings.javaScriptEnabled = true
         webView.settings.userAgentString = webView.settings.userAgentString + "Mobile Monot/1.0.0Beta1"
-        webView.loadUrl(searchUrl_top)
+        webView.loadUrl(searchUrlTop)
 
         // 検索ボタン関連
         searchButton.setOnClickListener {
@@ -103,7 +93,7 @@ class MainActivity : AppCompatActivity() {
             webView.reload()
         }
         homeButton.setOnClickListener {
-            webView.loadUrl(searchUrl_top)
+            webView.loadUrl(searchUrlTop)
         }
         repoButton.setOnClickListener {
             webView.loadUrl("https://github.com/mncrp/Monot-for-Android")
@@ -147,7 +137,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun url() {
-        val searchUrl_top = searchEngine()
+        val searchUrlTop = searchEngine()
         val webView = findViewById<WebView>(R.id.webview)
         val editText = findViewById<EditText>(R.id.editTextURL)
         val urlText: String = editText.text.toString()
@@ -160,12 +150,12 @@ class MainActivity : AppCompatActivity() {
                 editText.setText(urlText)
             }
             isItUrl != -1 -> {
-                val searchUrl = "$searchUrl_top$urlText"
+                val searchUrl = "$searchUrlTop$urlText"
                 webView.loadUrl(searchUrl)
                 editText.setText(searchUrl)
             }
             else -> {
-                val searchUrl = "$searchUrl_top$urlText"
+                val searchUrl = "$searchUrlTop$urlText"
                 webView.loadUrl(searchUrl)
                 editText.setText(searchUrl)
             }
