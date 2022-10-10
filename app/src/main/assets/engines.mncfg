@@ -1,0 +1,11 @@
+{
+  "values": {
+    "ddg":"https://www.duckduckgo.com/?q=",
+    "google":"https://www.google.com/search?q=",
+    "yahoo-jp":"https://search.yahoo.co.jp/search?p=",
+    "bing":"https://www.bing.com/search?q=",
+    "yahoo":"https://search.yahoo.com/search?p=",
+    "ecosia": "https://ecosia.org/search?q=",
+    "frea": "https://freasearch.org/search?q="
+  }
+}

@@ -14,6 +14,9 @@ import android.webkit.WebViewClient
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
+import org.json.JSONObject
+import java.io.BufferedReader
+import java.io.InputStreamReader
 
 
 class MainActivity : AppCompatActivity() {
@@ -130,35 +133,15 @@ class MainActivity : AppCompatActivity() {
 
     fun searchEngine(): String {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val search_engine = sharedPreferences.getString("search_engine", "")
-        var searchUrl_top = "null"
-        when (search_engine) {
-            "Google" -> {
-                searchUrl_top = "https://www.google.com/search?q="
-            }
-            "Yahoo!" -> {
-                searchUrl_top = "https://search.yahoo.com/search?p="
-            }
-            "Yahoo! Japan" -> {
-                searchUrl_top = "https://search.yahoo.co.jp/search?p="
-            }
-            "DuckDuckGo" -> {
-                searchUrl_top = "https://duckduckgo.com/?q="
-            }
-            "Ecosia" -> {
-                searchUrl_top = "https://ecosia.org/search?q="
-            }
-            "Bing" -> {
-                searchUrl_top = "https://www.bing.com/search?q="
-            }
-            "Frea Search" -> {
-                searchUrl_top = "https://freasearch.org/search?q="
-            }
-            else -> {
-                searchUrl_top = "https://www.google.com/search?q="
-            }
-        }
-        return(searchUrl_top)
+        var search_engine = sharedPreferences.getString("search_engine", "ddg")
+        val assetManager= resources.assets
+        val inputSystem = assetManager.open("engines.mncfg")
+        val bufferedReader = BufferedReader(InputStreamReader(inputSystem))
+        val engineMncfg: String = bufferedReader.readText()
+        val engineMncfgOb = JSONObject(engineMncfg)
+        val engineValues = engineMncfgOb.getJSONObject("values")
+        val searchUrlTop = engineValues.getString("${search_engine}")
+        return(searchUrlTop)
     }
 
     fun url() {
