@@ -2,10 +2,8 @@ package com.example.monotforandroid
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.renderscript.ScriptGroup
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -39,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         val homeButton = findViewById<ImageButton>(R.id.homeButton)
         val repoButton = findViewById<Button>(R.id.repoButton)
 
-        val searchUrl_top = searchEngine()
+        val searchUrlTop = searchEngine()
 
         val keyboard = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
@@ -69,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         }
         webView.settings.javaScriptEnabled = true
         webView.settings.userAgentString = webView.settings.userAgentString + "Mobile Monot/1.0.0Beta1"
-        webView.loadUrl(searchUrl_top)
+        webView.loadUrl(searchUrlTop)
 
         // 検索ボタン関連
         searchButton.setOnClickListener {
@@ -101,7 +99,7 @@ class MainActivity : AppCompatActivity() {
             webView.reload()
         }
         homeButton.setOnClickListener {
-            webView.loadUrl(searchUrl_top)
+            webView.loadUrl(searchUrlTop)
         }
         repoButton.setOnClickListener {
             webView.loadUrl("https://github.com/mncrp/Monot-for-Android")
@@ -131,21 +129,21 @@ class MainActivity : AppCompatActivity() {
         return super.onKeyDown(keyCode, event)
     }
 
-    fun searchEngine(): String {
+    private fun searchEngine(): String {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        var search_engine = sharedPreferences.getString("search_engine", "ddg")
+        val searchEngine = sharedPreferences.getString("search_engine", "ddg")
         val assetManager= resources.assets
         val inputSystem = assetManager.open("engines.mncfg")
         val bufferedReader = BufferedReader(InputStreamReader(inputSystem))
         val engineMncfg: String = bufferedReader.readText()
         val engineMncfgOb = JSONObject(engineMncfg)
         val engineValues = engineMncfgOb.getJSONObject("values")
-        val searchUrlTop = engineValues.getString("${search_engine}")
+        val searchUrlTop = engineValues.getString("$searchEngine")
         return(searchUrlTop)
     }
 
     fun url() {
-        val searchUrl_top = searchEngine()
+        val searchUrlTop = searchEngine()
         val webView = findViewById<WebView>(R.id.webview)
         val editText = findViewById<EditText>(R.id.editTextURL)
         val urlText: String = editText.text.toString()
@@ -158,12 +156,12 @@ class MainActivity : AppCompatActivity() {
                 editText.setText(urlText)
             }
             isItUrl != -1 -> {
-                val searchUrl = "$searchUrl_top$urlText"
+                val searchUrl = "$searchUrlTop$urlText"
                 webView.loadUrl(searchUrl)
                 editText.setText(searchUrl)
             }
             else -> {
-                val searchUrl = "$searchUrl_top$urlText"
+                val searchUrl = "$searchUrlTop$urlText"
                 webView.loadUrl(searchUrl)
                 editText.setText(searchUrl)
             }
