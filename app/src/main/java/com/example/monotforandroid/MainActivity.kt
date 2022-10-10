@@ -1,7 +1,6 @@
 package com.example.monotforandroid
 
 import android.annotation.SuppressLint
-import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -13,7 +12,6 @@ import android.view.inputmethod.InputMethodManager
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.*
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 
@@ -37,7 +35,6 @@ class MainActivity : AppCompatActivity() {
         val reloadButton = findViewById<ImageButton>(R.id.reloadButton)
         val homeButton = findViewById<ImageButton>(R.id.homeButton)
         val repoButton = findViewById<Button>(R.id.repoButton)
-        val versionButton = findViewById<Button>(R.id.versionButton)
 
         val searchUrl_top = searchEngine()
 
@@ -68,6 +65,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         webView.settings.javaScriptEnabled = true
+        webView.settings.userAgentString = webView.settings.userAgentString + "Mobile Monot/1.0.0Beta1"
         webView.loadUrl(searchUrl_top)
 
         // 検索ボタン関連
@@ -104,16 +102,6 @@ class MainActivity : AppCompatActivity() {
         }
         repoButton.setOnClickListener {
             webView.loadUrl("https://github.com/mncrp/Monot-for-Android")
-        }
-        versionButton.setOnClickListener {
-            val versionDialogBuilder = AlertDialog.Builder(this)
-            versionDialogBuilder.setTitle("Version")
-            versionDialogBuilder.setMessage("Monot for Android Version 0.0.3 α\nLicenced by monochrome. Licence.")
-            versionDialogBuilder.setPositiveButton("OK") { _, _ -> }
-            versionDialogBuilder.setNegativeButton("monochrome. Licence") { _, _ ->
-                webView.loadUrl("https://github.com/mncrp/Monot-for-Android/blob/master/Licence.md")
-            }
-            versionDialogBuilder.show()
         }
         // editTextにフォーカスしている状態でEnterを押された際の動作
         editText.setOnKeyListener(object : View.OnKeyListener {
