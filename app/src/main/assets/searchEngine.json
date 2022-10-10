@@ -1,0 +1,47 @@
+{
+  "urls": {
+    "Google": "https://www.google.com",
+    "Yahoo!": "https://www.yahoo.com",
+    "Yahoo! Japan": "https://www.yahoo.co.jp",
+    "DuckDuckGo": "https://duckduckgo.com",
+    "Ecosia": "https://ecosia.org",
+    "Bing": "https://www.bing.com",
+    "Frea Search": "https://freasearch.org"
+  },
+  "searches": {},
+    "Google" : {
+      "name" : "Google",
+      "url" : "https://www.google.com",
+      "search" : "https://www.google.com/search?q="
+    },
+    "Yahoo!" : {
+      "name" : "Yahoo!",
+      "url" : "https://www.yahoo.com",
+      "search" : "https://search.yahoo.com/search?p="
+    },
+    "Yahoo! Japan" : {
+      "name" : "Yahoo! Japan",
+      "url" : "https://www.yahoo.co.jp",
+      "search" : "https://search.yahoo.co.jp/search?p="
+    },
+    "DuckDuckGo" : {
+      "name" : "DuckDuckGo",
+      "url" : "https://duckduckgo.com",
+      "search" : "https://duckduckgo.com/?q="
+    },
+    "Ecosia": {
+      "name" : "Ecosia",
+      "url" : "https://ecosia.org",
+      "search" : "https;//ecosia.org/search?q="
+    },
+    "Bing" : {
+      "name" : "Bing",
+      "url" : "https://www.bing.com",
+      "search" : "https://www.bing.com/search?q="
+    },
+    "Frea Search" : {
+      "name" : "Frea Search",
+      "url" : "https://freasearch.org",
+      "search" : "https://freasearch.org/search?q="
+    }
+}

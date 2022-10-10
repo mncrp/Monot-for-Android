@@ -17,4 +17,5 @@
     <!-- Preference Titles -->
     <string name="general_settings">一般設定</string>
     <string name="search_engine">検索エンジン</string>
+    <string name="version_zyoho">バージョン情報</string>
 </resources>

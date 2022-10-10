@@ -102,6 +102,7 @@
         android:layout_height="match_parent" />
 
     <!--影をずらすためだけのやつ(?)-->
+
     <View
         android:id="@+id/kageZurashi"
         android:layout_width="170dp"
@@ -212,6 +213,21 @@
             android:paddingBottom="15dp"
             android:gravity="left|center_vertical"
             tools:ignore="RtlSymmetry" />
+
+        <Button
+            android:id="@+id/versionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:gravity="left|center_vertical"
+            android:onClick="onVersionButtonClicked"
+            android:paddingLeft="10dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:text="@string/version_zyoho"
+            android:textColor="@color/text_color"
+            tools:ignore="RtlSymmetry" />
+
     </LinearLayout>
 
     <!-- <FrameLayout
