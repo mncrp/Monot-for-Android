@@ -131,16 +131,16 @@ class MainActivity : AppCompatActivity() {
         return super.onKeyDown(keyCode, event)
     }
 
-    fun searchEngine(): String {
+    private fun searchEngine(): String {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        var search_engine = sharedPreferences.getString("search_engine", "ddg")
+        val searchEngine = sharedPreferences.getString("search_engine", "ddg")
         val assetManager= resources.assets
         val inputSystem = assetManager.open("engines.mncfg")
         val bufferedReader = BufferedReader(InputStreamReader(inputSystem))
         val engineMncfg: String = bufferedReader.readText()
         val engineMncfgOb = JSONObject(engineMncfg)
         val engineValues = engineMncfgOb.getJSONObject("values")
-        val searchUrlTop = engineValues.getString("${search_engine}")
+        val searchUrlTop = engineValues.getString("$searchEngine")
         return(searchUrlTop)
     }
 
