@@ -1,6 +1,5 @@
 package com.example.monotforandroid
 
-import android.app.PendingIntent.getActivity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -27,5 +26,12 @@ class SettingsActivity : AppCompatActivity() {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
             val signaturePreference: ListPreference? = findPreference("search_engine")
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this, MainActivity::class.java)
+        finish()
+        startActivity(intent)
     }
 }

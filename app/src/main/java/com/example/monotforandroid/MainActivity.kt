@@ -2,16 +2,17 @@ package com.example.monotforandroid
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.renderscript.ScriptGroup
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import org.json.JSONObject
@@ -83,6 +84,7 @@ class MainActivity : AppCompatActivity() {
             settingButton.setOnClickListener {
                 val intent = Intent(this, SettingsActivity::class.java)
                 startActivity(intent)
+                finish()
             }
             noMenu.setOnClickListener {
                 menu.visibility = View.INVISIBLE
