@@ -1,5 +1,5 @@
 {
-  "values": {
+  "queryUrl": {
     "ddg":"https://www.duckduckgo.com/?q=",
     "google":"https://www.google.com/search?q=",
     "yahoo-jp":"https://search.yahoo.co.jp/search?p=",
@@ -7,5 +7,14 @@
     "yahoo":"https://search.yahoo.com/search?p=",
     "ecosia": "https://ecosia.org/search?q=",
     "frea": "https://freasearch.org/search?q="
+  },
+  "url": {
+    "ddg":"https://www.duckduckgo.com/",
+    "google":"https://www.google.com/",
+    "yahoo-jp":"https://yahoo.co.jp/",
+    "bing":"https://www.bing.com/",
+    "yahoo":"https://yahoo.com/",
+    "ecosia": "https://ecosia.org/",
+    "frea": "https://freasearch.org/"
   }
 }

@@ -9,12 +9,10 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.LinearLayout
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
+import com.google.android.material.snackbar.Snackbar
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -40,7 +38,8 @@ class MainActivity : AppCompatActivity() {
         val homeButton = findViewById<ImageButton>(R.id.homeButton)
         val repoButton = findViewById<Button>(R.id.repoButton)
 
-        val searchUrlTop = searchEngine()
+        val searchUrlTop = searchEngine("search")
+        val home = searchEngine("home")
 
         val keyboard = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
@@ -60,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         }
         webView.settings.javaScriptEnabled = true
         webView.settings.userAgentString = webView.settings.userAgentString + "Mobile Monot/1.0.0Beta1"
-        webView.loadUrl(searchUrlTop)
+        webView.loadUrl(home)
 
         // 検索ボタン関連
         searchButton.setOnClickListener {
@@ -123,7 +122,8 @@ class MainActivity : AppCompatActivity() {
         return super.onKeyDown(keyCode, event)
     }
 
-    private fun searchEngine(): String {
+    // 検索エンジンをassetsのengines.mncfgでJSONとして管理しています
+    private fun searchEngine(mode: String): String {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val searchEngine = sharedPreferences.getString("search_engine", "ddg")
         val assetManager= resources.assets
@@ -131,13 +131,29 @@ class MainActivity : AppCompatActivity() {
         val bufferedReader = BufferedReader(InputStreamReader(inputSystem))
         val engineMncfg: String = bufferedReader.readText()
         val engineMncfgOb = JSONObject(engineMncfg)
-        val engineValues = engineMncfgOb.getJSONObject("values")
-        val searchUrlTop = engineValues.getString("$searchEngine")
-        return(searchUrlTop)
+        return when (mode) {
+            "search" -> {
+                val engineValues = engineMncfgOb.getJSONObject("queryUrl")
+                val searchUrlTop = engineValues.getString("$searchEngine")
+                (searchUrlTop)
+            }
+            "home" -> {
+                val engineValues = engineMncfgOb.getJSONObject("url")
+                val homeUrl = engineValues.getString("$searchEngine")
+                (homeUrl)
+            }
+            else -> {
+                val errorToast = Toast.makeText(this,
+                    "エラーが発生しました。このメッセージが表示された場合は、開発者に連絡してください。",
+                    Toast.LENGTH_LONG)
+                errorToast.show()
+                ("Error!")
+            }
+        }
     }
 
     fun url() {
-        val searchUrlTop = searchEngine()
+        val searchUrlTop = searchEngine("query")
         val webView = findViewById<WebView>(R.id.webview)
         val editText = findViewById<EditText>(R.id.editTextURL)
         val urlText: String = editText.text.toString()
