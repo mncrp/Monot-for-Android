@@ -1,7 +1,9 @@
 package com.example.monotforandroid
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
@@ -10,9 +12,9 @@ import android.view.inputmethod.InputMethodManager
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
-import com.google.android.material.snackbar.Snackbar
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -37,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         val reloadButton = findViewById<ImageButton>(R.id.reloadButton)
         val homeButton = findViewById<ImageButton>(R.id.homeButton)
         val repoButton = findViewById<Button>(R.id.repoButton)
+        val versionButton = findViewById<Button>(R.id.versionButton)
 
         val searchUrlTop = searchEngine("search")
         val home = searchEngine("home")
@@ -108,6 +111,20 @@ class MainActivity : AppCompatActivity() {
                 return false
             }
         })
+        versionButton.setOnClickListener {
+            AlertDialog.Builder(this)
+                .setTitle("Version")
+                .setMessage("Monot for Android by monochrome.\n" +
+                        "Version: 0.0.4\n" +
+                        "Build number: 4\n" +
+                        "repo: https://github.com/mncrp/Monot-for-Android\n" +
+                        "Copyright © monochrome Project.\n")
+                .setPositiveButton("OK", null)
+                .setNegativeButton("See Repo") { _, _ ->
+                    webView.loadUrl("https://github.com/mncrp/Monot-for-Android")
+                }
+                .show()
+        }
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
