@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
         webView.settings.javaScriptEnabled = true
         webView.settings.userAgentString = webView.settings.userAgentString + "Mobile Monot/1.0.0Beta1"
-        webView.loadUrl(searchEngine("home"))
+        webView.loadUrl(searchEngine(false))
 
         // 検索ボタン関連
         findViewById<ImageButton>(R.id.searchButton).setOnClickListener {
@@ -117,7 +117,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 webView.reload()
             }
             R.id.homeButton -> {
-                webView.loadUrl(searchEngine("home"))
+                webView.loadUrl(searchEngine(false))
             }
         }
     }
@@ -135,7 +135,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     // 検索エンジンをassetsのengines.mncfgでJSONとして管理しています
-    private fun searchEngine(mode: String): String {
+    private fun searchEngine(mode: Boolean): String {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val searchEngine = sharedPreferences.getString("search_engine", "ddg")
         val assetManager= resources.assets
@@ -144,28 +144,23 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val engineMncfg: String = bufferedReader.readText()
         val engineMncfgOb = JSONObject(engineMncfg)
         return when (mode) {
-            "search" -> {
+            true -> {
+                // クエリ取得はtrue
                 val engineValues = engineMncfgOb.getJSONObject("queryUrl")
                 val searchUrlTop = engineValues.getString("$searchEngine")
                 (searchUrlTop)
             }
-            "home" -> {
+            false -> {
+                // ホーム取得はfalse
                 val engineValues = engineMncfgOb.getJSONObject("url")
                 val homeUrl = engineValues.getString("$searchEngine")
                 (homeUrl)
-            }
-            else -> {
-                val errorToast = Toast.makeText(this,
-                    "エラーが発生しました。このメッセージが表示された場合は、開発者に連絡してください。",
-                    Toast.LENGTH_LONG)
-                errorToast.show()
-                ("Error!")
             }
         }
     }
 
     fun url() {
-        val searchUrlTop = searchEngine("query")
+        val searchUrlTop = searchEngine(true)
         val webView = findViewById<WebView>(R.id.webview)
         val editText = findViewById<EditText>(R.id.editTextURL)
         val urlText: String = editText.text.toString()
