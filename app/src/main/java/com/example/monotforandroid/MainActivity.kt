@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val editText = findViewById<EditText>(R.id.editTextURL)
+        val addressBar = findViewById<EditText>(R.id.editTextURL)
         val webView = findViewById<WebView>(R.id.webview)
         val searchButton = findViewById<ImageButton>(R.id.searchButton)
         val menuButton = findViewById<ImageButton>(R.id.menuButton)
@@ -50,13 +50,13 @@ class MainActivity : AppCompatActivity() {
         kageZurashi.visibility = View.INVISIBLE
 
         //アドレスバーの初期化
-        editText.text.clear()
+        addressBar.text.clear()
 
         // WebView関連
         webView.webViewClient = object : WebViewClient() {
             @Deprecated("Deprecated in Java")
             override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
-                editText.setText(url)
+                addressBar.setText(url)
                 return false
             }
         }
@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity() {
             webView.loadUrl("https://github.com/mncrp/Monot-for-Android")
         }
         // editTextにフォーカスしている状態でEnterを押された際の動作
-        editText.setOnKeyListener(object : View.OnKeyListener {
+        addressBar.setOnKeyListener(object : View.OnKeyListener {
             override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
                 if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
                     url()
