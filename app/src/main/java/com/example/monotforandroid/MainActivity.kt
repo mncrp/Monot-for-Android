@@ -1,9 +1,7 @@
 package com.example.monotforandroid
 
 import android.annotation.SuppressLint
-import android.app.Dialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
@@ -20,7 +18,7 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
     @SuppressLint("SetJavaScriptEnabled", "RtlHardcoded", "ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,21 +26,13 @@ class MainActivity : AppCompatActivity() {
 
         val addressBar = findViewById<EditText>(R.id.editTextURL)
         val webView = findViewById<WebView>(R.id.webview)
-        val searchButton = findViewById<ImageButton>(R.id.searchButton)
-        val menuButton = findViewById<ImageButton>(R.id.menuButton)
         val menu = findViewById<LinearLayout>(R.id.menuLayout)
         val noMenu = findViewById<View>(R.id.noMenu)
         val kageZurashi = findViewById<View>(R.id.kageZurashi)
-        val settingButton = findViewById<Button>(R.id.settingsButton)
-        val backButton = findViewById<ImageButton>(R.id.backButton)
-        val forwardButton = findViewById<ImageButton>(R.id.forwardButton)
-        val reloadButton = findViewById<ImageButton>(R.id.reloadButton)
-        val homeButton = findViewById<ImageButton>(R.id.homeButton)
-        val repoButton = findViewById<Button>(R.id.repoButton)
-        val versionButton = findViewById<Button>(R.id.versionButton)
-
-        val searchUrlTop = searchEngine("search")
-        val home = searchEngine("home")
+        findViewById<ImageButton>(R.id.backButton).setOnClickListener(this)
+        findViewById<ImageButton>(R.id.forwardButton).setOnClickListener(this)
+        findViewById<ImageButton>(R.id.reloadButton).setOnClickListener(this)
+        findViewById<ImageButton>(R.id.homeButton).setOnClickListener(this)
 
         val keyboard = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
@@ -62,18 +52,18 @@ class MainActivity : AppCompatActivity() {
         }
         webView.settings.javaScriptEnabled = true
         webView.settings.userAgentString = webView.settings.userAgentString + "Mobile Monot/1.0.0Beta1"
-        webView.loadUrl(home)
+        webView.loadUrl(searchEngine("home"))
 
         // 検索ボタン関連
-        searchButton.setOnClickListener {
+        findViewById<ImageButton>(R.id.searchButton).setOnClickListener {
             url()
         }
-        menuButton.setOnClickListener {
+        findViewById<ImageButton>(R.id.menuButton).setOnClickListener {
             /*popupMenu.showAsDropDown(findViewById(R.id.menuButton))
             Log.d("TAG", "Hi")*/
             menu.visibility = View.VISIBLE
             kageZurashi.visibility = View.VISIBLE
-            settingButton.setOnClickListener {
+            findViewById<Button>(R.id.settingsButton).setOnClickListener {
                 val intent = Intent(this, SettingsActivity::class.java)
                 startActivity(intent)
                 finish()
@@ -84,20 +74,7 @@ class MainActivity : AppCompatActivity() {
                 noMenu.isClickable = false
             }
         }
-
-        backButton.setOnClickListener {
-            webView.goBack()
-        }
-        forwardButton.setOnClickListener {
-            webView.goForward()
-        }
-        reloadButton.setOnClickListener {
-            webView.reload()
-        }
-        homeButton.setOnClickListener {
-            webView.loadUrl(searchUrlTop)
-        }
-        repoButton.setOnClickListener {
+        findViewById<Button>(R.id.repoButton).setOnClickListener {
             webView.loadUrl("https://github.com/mncrp/Monot-for-Android")
         }
         // editTextにフォーカスしている状態でEnterを押された際の動作
@@ -111,7 +88,7 @@ class MainActivity : AppCompatActivity() {
                 return false
             }
         })
-        versionButton.setOnClickListener {
+        findViewById<Button>(R.id.versionButton).setOnClickListener {
             AlertDialog.Builder(this)
                 .setTitle("Version")
                 .setMessage("Monot for Android by monochrome.\n" +
@@ -124,6 +101,24 @@ class MainActivity : AppCompatActivity() {
                     webView.loadUrl("https://github.com/mncrp/Monot-for-Android")
                 }
                 .show()
+        }
+    }
+
+    override fun onClick(v: View) {
+        val webView = findViewById<WebView>(R.id.webview)
+        when (v.id) {
+            R.id.backButton -> {
+                webView.goBack()
+            }
+            R.id.forwardButton -> {
+                webView.goForward()
+            }
+            R.id.reloadButton -> {
+                webView.reload()
+            }
+            R.id.homeButton -> {
+                webView.loadUrl(searchEngine("home"))
+            }
         }
     }
 
