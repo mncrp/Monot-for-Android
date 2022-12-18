@@ -220,7 +220,6 @@
             android:layout_height="wrap_content"
             android:background="#00000000"
             android:gravity="left|center_vertical"
-            android:onClick="onVersionButtonClicked"
             android:paddingLeft="10dp"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"

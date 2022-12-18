@@ -10,36 +10,29 @@ import android.view.inputmethod.InputMethodManager
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
-import com.google.android.material.snackbar.Snackbar
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
     @SuppressLint("SetJavaScriptEnabled", "RtlHardcoded", "ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val editText = findViewById<EditText>(R.id.editTextURL)
+        val addressBar = findViewById<EditText>(R.id.editTextURL)
         val webView = findViewById<WebView>(R.id.webview)
-        val searchButton = findViewById<ImageButton>(R.id.searchButton)
-        val menuButton = findViewById<ImageButton>(R.id.menuButton)
         val menu = findViewById<LinearLayout>(R.id.menuLayout)
         val noMenu = findViewById<View>(R.id.noMenu)
         val kageZurashi = findViewById<View>(R.id.kageZurashi)
-        val settingButton = findViewById<Button>(R.id.settingsButton)
-        val backButton = findViewById<ImageButton>(R.id.backButton)
-        val forwardButton = findViewById<ImageButton>(R.id.forwardButton)
-        val reloadButton = findViewById<ImageButton>(R.id.reloadButton)
-        val homeButton = findViewById<ImageButton>(R.id.homeButton)
-        val repoButton = findViewById<Button>(R.id.repoButton)
-
-        val searchUrlTop = searchEngine("search")
-        val home = searchEngine("home")
+        findViewById<ImageButton>(R.id.backButton).setOnClickListener(this)
+        findViewById<ImageButton>(R.id.forwardButton).setOnClickListener(this)
+        findViewById<ImageButton>(R.id.reloadButton).setOnClickListener(this)
+        findViewById<ImageButton>(R.id.homeButton).setOnClickListener(this)
 
         val keyboard = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
@@ -47,30 +40,30 @@ class MainActivity : AppCompatActivity() {
         kageZurashi.visibility = View.INVISIBLE
 
         //アドレスバーの初期化
-        editText.text.clear()
+        addressBar.text.clear()
 
         // WebView関連
         webView.webViewClient = object : WebViewClient() {
             @Deprecated("Deprecated in Java")
             override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
-                editText.setText(url)
+                addressBar.setText(url)
                 return false
             }
         }
         webView.settings.javaScriptEnabled = true
         webView.settings.userAgentString = webView.settings.userAgentString + "Mobile Monot/1.0.0Beta1"
-        webView.loadUrl(home)
+        webView.loadUrl(searchEngine(false))
 
         // 検索ボタン関連
-        searchButton.setOnClickListener {
+        findViewById<ImageButton>(R.id.searchButton).setOnClickListener {
             url()
         }
-        menuButton.setOnClickListener {
+        findViewById<ImageButton>(R.id.menuButton).setOnClickListener {
             /*popupMenu.showAsDropDown(findViewById(R.id.menuButton))
             Log.d("TAG", "Hi")*/
             menu.visibility = View.VISIBLE
             kageZurashi.visibility = View.VISIBLE
-            settingButton.setOnClickListener {
+            findViewById<Button>(R.id.settingsButton).setOnClickListener {
                 val intent = Intent(this, SettingsActivity::class.java)
                 startActivity(intent)
                 finish()
@@ -81,24 +74,11 @@ class MainActivity : AppCompatActivity() {
                 noMenu.isClickable = false
             }
         }
-
-        backButton.setOnClickListener {
-            webView.goBack()
-        }
-        forwardButton.setOnClickListener {
-            webView.goForward()
-        }
-        reloadButton.setOnClickListener {
-            webView.reload()
-        }
-        homeButton.setOnClickListener {
-            webView.loadUrl(searchUrlTop)
-        }
-        repoButton.setOnClickListener {
+        findViewById<Button>(R.id.repoButton).setOnClickListener {
             webView.loadUrl("https://github.com/mncrp/Monot-for-Android")
         }
         // editTextにフォーカスしている状態でEnterを押された際の動作
-        editText.setOnKeyListener(object : View.OnKeyListener {
+        addressBar.setOnKeyListener(object : View.OnKeyListener {
             override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
                 if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
                     url()
@@ -108,6 +88,38 @@ class MainActivity : AppCompatActivity() {
                 return false
             }
         })
+        findViewById<Button>(R.id.versionButton).setOnClickListener {
+            AlertDialog.Builder(this)
+                .setTitle("Version")
+                .setMessage("Monot for Android by monochrome.\n" +
+                        "Version: 0.0.4\n" +
+                        "Build number: 4\n" +
+                        "repo: https://github.com/mncrp/Monot-for-Android\n" +
+                        "Copyright © monochrome Project.\n")
+                .setPositiveButton("OK", null)
+                .setNegativeButton("See Repo") { _, _ ->
+                    webView.loadUrl("https://github.com/mncrp/Monot-for-Android")
+                }
+                .show()
+        }
+    }
+
+    override fun onClick(v: View) {
+        val webView = findViewById<WebView>(R.id.webview)
+        when (v.id) {
+            R.id.backButton -> {
+                webView.goBack()
+            }
+            R.id.forwardButton -> {
+                webView.goForward()
+            }
+            R.id.reloadButton -> {
+                webView.reload()
+            }
+            R.id.homeButton -> {
+                webView.loadUrl(searchEngine(false))
+            }
+        }
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
@@ -123,7 +135,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // 検索エンジンをassetsのengines.mncfgでJSONとして管理しています
-    private fun searchEngine(mode: String): String {
+    private fun searchEngine(mode: Boolean): String {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val searchEngine = sharedPreferences.getString("search_engine", "ddg")
         val assetManager= resources.assets
@@ -132,28 +144,23 @@ class MainActivity : AppCompatActivity() {
         val engineMncfg: String = bufferedReader.readText()
         val engineMncfgOb = JSONObject(engineMncfg)
         return when (mode) {
-            "search" -> {
+            true -> {
+                // クエリ取得はtrue
                 val engineValues = engineMncfgOb.getJSONObject("queryUrl")
                 val searchUrlTop = engineValues.getString("$searchEngine")
                 (searchUrlTop)
             }
-            "home" -> {
+            false -> {
+                // ホーム取得はfalse
                 val engineValues = engineMncfgOb.getJSONObject("url")
                 val homeUrl = engineValues.getString("$searchEngine")
                 (homeUrl)
-            }
-            else -> {
-                val errorToast = Toast.makeText(this,
-                    "エラーが発生しました。このメッセージが表示された場合は、開発者に連絡してください。",
-                    Toast.LENGTH_LONG)
-                errorToast.show()
-                ("Error!")
             }
         }
     }
 
     fun url() {
-        val searchUrlTop = searchEngine("query")
+        val searchUrlTop = searchEngine(true)
         val webView = findViewById<WebView>(R.id.webview)
         val editText = findViewById<EditText>(R.id.editTextURL)
         val urlText: String = editText.text.toString()
